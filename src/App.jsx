@@ -4,7 +4,7 @@ import Search from './components/Search.jsx'
 import GifDisplay from './components/GifDisplay.jsx';
 import axios from 'axios';
 function App() {
-  const apiKey= "AIzaSyCZrNZd8IcHffb1O8HputxG5GVTx8LbKI0";
+  
   const [gif, setGif] = useState(null);
 
   const getGif = async(searchTerm) => {

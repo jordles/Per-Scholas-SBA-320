@@ -1,3 +1,7 @@
+*{
+  box-sizing: border-box;
+}
+
 #root {
   /* max-width: 1280px; */
   width: 100%;
@@ -72,11 +76,13 @@ input{
 }
 
 .gif-wrapper:hover{
-  border: 2px yellow solid;
+  border: 2px black solid;
 }
 
 .gif-wrapper{
   position: relative;
+  width: fit-content;
+  height: fit-content;
 }
 
 .download, .heart{
