@@ -67,6 +67,7 @@ input{
 .gif-display{
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   gap: 10px;
 }
 
@@ -75,38 +76,60 @@ input{
   flex: 0 0 auto; /* This ensures the image doesn't grow beyond its original size */
 }
 
-.gif-wrapper:hover{
-  border: 2px black solid;
-}
 
-.gif-wrapper{
+
+.gif-wrapper, .favorite-gif{
   position: relative;
   width: fit-content;
   height: fit-content;
+  border: 2px solid transparent;
 }
-
+.gif-wrapper:hover, .favorite-gif:hover{
+  border: 2px gold solid;
+}
+.gif-wrapper.favorited:hover{
+  border: 2px red solid;
+}
 .download, .heart{
   cursor: pointer;
   font-size: 2rem;
   display: none;
+  /* filter: drop-shadow(1px 1px 0 black) drop-shadow(-1px 1px 0 black) drop-shadow(1px -1px 0 black) drop-shadow(-1px -1px 0 black); */
+}
+.download{
+  color: rgb(199, 255, 192);
+  font-weight:900;
 }
 
-.gif-wrapper:hover .download, .gif-wrapper:hover .heart{
+.heart{
+  color: pink;
+}
+.heart.favorited {
+  color: red; /* Highlighted color */
+}
+/* .gif-wrapper:hover .download, .gif-wrapper:hover .heart{
   display: inline-block;
-}
+} */
 
-.gif-wrapper:hover .download{
+.gif-wrapper:hover .download, .favorite-gif:hover .download{
+  display: inline-block;
   position: absolute;
   right: 35px;
 }
 
-.gif-wrapper:hover .heart{
+.gif-wrapper:hover .heart, .favorite-gif:hover .heart{
+  display: inline-block;
   position: absolute;
   right: 5px;
 }
 .download:hover{
-  color: red;
+  color: green;
 }
 .heart:hover{
-  color: pink;
+  color: red;
+}
+
+.menu{
+  color: black;
+  font-size: 2rem;
 }

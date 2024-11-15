@@ -5,10 +5,9 @@ And yes, i do pronounce gif with a 'g'
 
 ## Features
 
-* Star your favorite gifs 
+* Star and view your favorite gifs 
 * Download any gifs you like
-* Categorize your favorite gifs
-* History management of query searches
+* Accessibility button to scroll back to the search bar
 
 
 ## Attributions
