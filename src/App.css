@@ -1,8 +1,12 @@
 #root {
-  max-width: 1280px;
+  /* max-width: 1280px; */
+  width: 100%;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .logo {
@@ -33,10 +37,70 @@
   }
 }
 
+
 .card {
   padding: 2em;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+input{
+  width: 80%;
+  font-size: 2rem;
+  margin: auto;
+  border-radius: 15px;
+  padding: 5px;
+  background: #3B3B3B;
+  border: none;
+}
+
+.title{
+  font-family: "Poller One", serif;
+}
+
+.gif-display{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.gif-display img{
+  object-fit: contain;
+  flex: 0 0 auto; /* This ensures the image doesn't grow beyond its original size */
+}
+
+.gif-wrapper:hover{
+  border: 2px yellow solid;
+}
+
+.gif-wrapper{
+  position: relative;
+}
+
+.download, .heart{
+  cursor: pointer;
+  font-size: 2rem;
+  display: none;
+}
+
+.gif-wrapper:hover .download, .gif-wrapper:hover .heart{
+  display: inline-block;
+}
+
+.gif-wrapper:hover .download{
+  position: absolute;
+  right: 35px;
+}
+
+.gif-wrapper:hover .heart{
+  position: absolute;
+  right: 5px;
+}
+.download:hover{
+  color: red;
+}
+.heart:hover{
+  color: pink;
 }
