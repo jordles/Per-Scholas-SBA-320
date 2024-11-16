@@ -84,6 +84,9 @@ input{
   height: fit-content;
   border: 2px solid transparent;
 }
+.favorite-gif img{
+  width: 100%;
+}
 .gif-wrapper:hover, .favorite-gif:hover{
   border: 2px gold solid;
 }
@@ -129,7 +132,19 @@ input{
   color: red;
 }
 
+.menu-button{
+  position:fixed !important;
+  top: 0;
+  right: 0;
+}
+
 .menu{
   color: black;
   font-size: 2rem;
+}
+
+.box{
+  background: #3B3B3B;
+  color: white;
+  height: 100%;
 }

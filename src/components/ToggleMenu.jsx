@@ -13,14 +13,14 @@ function ToggleMenu({favorites, downloadGif, toggleFavorite}) {
   }
 
   const DrawerList = (
-    <Box sx={{ width: 500 }} role="presentation">
+    <Box className="box"sx={{ width: 500 }} role="presentation">
       <Favorite favorites={favorites} downloadGif={downloadGif} toggleFavorite={toggleFavorite}/>
     </Box>
   )
 
   return (
     <div>
-      <Button onClick={toggleDrawer(true)}><span className="material-symbols-rounded menu">menu</span></Button>
+      <Button className="menu-button" onClick={toggleDrawer(true)}><span className="material-symbols-rounded menu">menu</span></Button>
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
         {DrawerList}
       </Drawer>

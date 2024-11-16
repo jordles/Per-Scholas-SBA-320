@@ -4,7 +4,7 @@ function Favorite({favorites, downloadGif, toggleFavorite}) {
   const isFavorited = (gifId) => favorites.some((favoriteGif) => favoriteGif.id === gifId);
   return (
     <div>
-      <div>⭐ Favorites ⭐</div>
+      <div style={{textAlign: "center"}}>⭐ Favorites ⭐</div>
       <Divider />
       {favorites.length > 0 ? (
         favorites.map((gif) => (

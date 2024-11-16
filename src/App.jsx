@@ -4,6 +4,7 @@ import Search from './components/Search.jsx'
 import GifDisplay from './components/GifDisplay.jsx';
 import axios from 'axios';
 import ToggleMenu from './components/ToggleMenu.jsx';
+import Footer from './components/Footer.jsx';
 function App() {
   const apiKey = import.meta.env.VITE_API_KEY
   const [gif, setGif] = useState(null);
@@ -18,23 +19,44 @@ function App() {
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
   }, [favorites]);
-  
-  const getGif = async(searchTerm) => {
-    try {
-      const response = await axios.get(
-        `https://tenor.googleapis.com/v2/search?key=${apiKey}&q=${searchTerm}`
-      );
-      const data = await response.data;
-      setGif(data); // this will update the gif state
-    } catch(e) {
-      console.error(e)
-    }
-  };
 
-  // This will run on the first render but not on subsquent renders
-  // useEffect(() => {
-  //   getGif("hello");
-  // }, []);
+  // const getGif = async(searchTerm) => {
+  //   try {
+  //     const response = await axios.get(
+  //       `https://tenor.googleapis.com/v2/search?key=${apiKey}&q=${searchTerm}`
+  //     );
+  //     const data = await response.data;
+  //     setGif(data); // this will update the gif state
+  //   } catch(e) {
+  //     console.error(e)
+  //   }
+  // };
+
+  const getGif = (searchTerm) => {
+    const xhr = new XMLHttpRequest();
+    const url = `https://tenor.googleapis.com/v2/search?key=${apiKey}&q=${searchTerm}`;
+  
+    xhr.open("GET", url, true); // Open a GET request asynchronously
+  
+    xhr.onload = function () {
+      if (xhr.status === 200) {
+        try {
+          const data = JSON.parse(xhr.responseText); // Parse JSON response
+          setGif(data); // Update the gif state
+        } catch (error) {
+          console.error("Error parsing response data:", error);
+        }
+      } else {
+        console.error("Request failed with status:", xhr.status);
+      }
+    };
+  
+    xhr.onerror = function () {
+      console.error("Network error occurred");
+    };
+  
+    xhr.send(); // Send the request
+  };
 
 
   const downloadGif = async gif => {
@@ -89,6 +111,7 @@ function App() {
       <h1 className="title">Giffy in a Jiffy</h1>
       <Search gifsearch={getGif}/>
       <GifDisplay gif={gif} favorites={favorites} downloadGif={downloadGif} toggleFavorite={toggleFavorite}/>
+      <Footer />
     </>
   )
 }
