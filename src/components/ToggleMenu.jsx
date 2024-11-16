@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
 
-function ToggleMenu({favorites, toggleFavorite}) {
+function ToggleMenu({favorites, downloadGif, toggleFavorite}) {
   const [open, setOpen] = useState(false);
 
   const toggleDrawer = (newOpen) => () => {
@@ -13,8 +13,8 @@ function ToggleMenu({favorites, toggleFavorite}) {
   }
 
   const DrawerList = (
-    <Box sx={{ width: 500 }} role="presentation" onClick={toggleDrawer(false)}>
-      <Favorite favorites={favorites} toggleFavorite={toggleFavorite}/>
+    <Box sx={{ width: 500 }} role="presentation">
+      <Favorite favorites={favorites} downloadGif={downloadGif} toggleFavorite={toggleFavorite}/>
     </Box>
   )
 

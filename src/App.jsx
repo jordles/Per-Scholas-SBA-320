@@ -8,8 +8,17 @@ function App() {
   const apiKey = import.meta.env.VITE_API_KEY
   const [gif, setGif] = useState(null);
 
-  const [favorites, setFavorites] = useState([]);
+  // Load favorites from localStorage or initialize an empty array
+  const [favorites, setFavorites] = useState(() => {
+    const storedFavorites = localStorage.getItem("favorites");
+    return storedFavorites ? JSON.parse(storedFavorites) : [];
+  });;
 
+  // Save favorites to localStorage whenever they change
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+  
   const getGif = async(searchTerm) => {
     try {
       const response = await axios.get(
@@ -28,7 +37,41 @@ function App() {
   // }, []);
 
 
-  const toggleFavorite = (gif) => {
+  const downloadGif = async gif => {
+    try {
+      const url = gif.media_formats.gif.url;
+  
+      // Fetch the file
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error("Failed to fetch GIF");
+      }
+  
+      // Convert the response to a Blob
+      const blob = await response.blob();
+  
+      // Create a downloadable object URL
+      const objectUrl = URL.createObjectURL(blob);
+  
+      // Create a link element
+      const link = document.createElement("a");
+      link.href = objectUrl;
+  
+      // Use the file name from the URL or a default name
+      const match = url.match(/\/([^\/]+)$/);
+      link.download = match ? match[1] : "download.gif";
+  
+      // Trigger the download
+      link.click();
+  
+      // Clean up the object URL to free memory
+      URL.revokeObjectURL(objectUrl);
+    } catch (error) {
+      console.error("Error downloading GIF:", error);
+    }
+  }
+
+  const toggleFavorite = gif => {
     setFavorites( prev => {
       //Check if the GIF is already favorited
       const isFavorited = prev.some(favorite => favorite.id === gif.id)
@@ -42,10 +85,10 @@ function App() {
   }
   return (
     <>
-      <ToggleMenu favorites={favorites} toggleFavorite={toggleFavorite}/>
+      <ToggleMenu favorites={favorites} downloadGif={downloadGif} toggleFavorite={toggleFavorite}/>
       <h1 className="title">Giffy in a Jiffy</h1>
       <Search gifsearch={getGif}/>
-      <GifDisplay gif={gif} favorites={favorites} toggleFavorite={toggleFavorite}/>
+      <GifDisplay gif={gif} favorites={favorites} downloadGif={downloadGif} toggleFavorite={toggleFavorite}/>
     </>
   )
 }

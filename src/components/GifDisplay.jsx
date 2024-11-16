@@ -1,6 +1,6 @@
 import React from 'react'
 
-function GifDisplay({gif, favorites, toggleFavorite}) {
+function GifDisplay({gif, favorites, downloadGif, toggleFavorite}) {
   const isFavorited = (gifId) => favorites.some((favoriteGif) => favoriteGif.id === gifId);
   const loaded = () => {
     console.log(gif);
@@ -12,7 +12,7 @@ function GifDisplay({gif, favorites, toggleFavorite}) {
               src={gif.media_formats.gif.url} 
               alt={gif.content_description} 
             />
-            <span className="material-symbols-rounded download">download</span>
+            <span className="material-symbols-rounded download" onClick={() => downloadGif(gif)}>download</span>
             <span className={`material-symbols-rounded heart ${isFavorited(gif.id) ? "favorited" : ""}`} onClick={() => toggleFavorite(gif)}>favorite</span>
           </div>  
         ))}
