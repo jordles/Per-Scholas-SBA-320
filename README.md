@@ -1,5 +1,7 @@
 # Giffy in a Jiffy 
 
+[Demo](https://luxury-tanuki-a2b011.netlify.app/)
+
 Find a gif in a flash!   
 And yes, i do pronounce gif with a 'g'.  
 
